@@ -1,11 +1,9 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 
 namespace TaskDPTextChange.View
 {
-
     public partial class TextSettingsControl : UserControl
     {
         public TextSettingsControl()

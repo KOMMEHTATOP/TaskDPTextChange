@@ -4,17 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskDPTextChange.View"
+        xmlns:helpers="clr-namespace:TaskDPTextChange.Helpers"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="400">
+    <Window.Resources>
+        <helpers:DPConverter x:Key="DPConverter"/>
+    </Window.Resources>
+    
     <Grid>
         <StackPanel>
-            <TextBox Name="UserInput"/>
-            <local:TextSettingsControl/>
-            <TextBlock Name="TextOutput" 
+            <TextBox Name="UserInput" Text="{Binding Text}"/>
+            <local:TextSettingsControl 
+                TextColor="{Binding TextColor}" 
+                FontSize="{Binding FontSize}" 
+                IsBold="{Binding IsBold}"/>
+            <TextBlock Name="TextOutput"
+                       Text="{Binding Text}"
                        VerticalAlignment="Center" HorizontalAlignment="Center" 
                        TextAlignment="Center"
-                       Width="380"
-                       Height="200"
+                       Width="380" Height="200"
+                       Foreground="{Binding TextColor, Converter={StaticResource DPConverter}}"
                        Background="DarkCyan"/>
         </StackPanel>
     </Grid>

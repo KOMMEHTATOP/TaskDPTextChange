@@ -8,16 +8,16 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
-            <ComboBox SelectedValue="{Binding TextColor, RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <ComboBox SelectedValue="{Binding TextColor}" SelectedValuePath="Tag">
                 <ComboBoxItem Content="Черный" Tag="Black"/>
                 <ComboBoxItem Content="Красный" Tag="Red"/>
                 <ComboBoxItem Content="Зеленый" Tag="Green"/>
                 <ComboBoxItem Content="Синий" Tag="Blue"/>
             </ComboBox>
-            <Slider Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=UserControl}}"
+            <Slider Value="{Binding FontSize}"
                     Minimum="10" Maximum="50"/>
 
-            <CheckBox Content="Жирный текст" IsChecked="{Binding IsBold, RelativeSource={RelativeSource AncestorType=UserControl}}">
+            <CheckBox Content="Жирный текст" IsChecked="{Binding IsBold}">
 
             </CheckBox>
         </StackPanel>

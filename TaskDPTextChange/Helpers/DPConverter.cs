@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -10,7 +11,15 @@ namespace TaskDPTextChange.Helpers
         {
             if (value is string colorName)
             {
-                return new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorName));
+                try
+                {
+                    Color color = (Color)ColorConverter.ConvertFromString(colorName);
+                    return new SolidColorBrush(color);
+                }
+                catch (FormatException ex)
+                {
+                    return Brushes.Black; 
+                }
             }
             return Brushes.Black;
         }

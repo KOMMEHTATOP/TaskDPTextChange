@@ -1,15 +1,17 @@
 ﻿
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.Windows.Controls;
 
 namespace TaskDPTextChange.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChange(object parameter)
+        public void OnPropertyChange(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(parameter)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private string _text = string.Empty;
@@ -22,14 +24,14 @@ namespace TaskDPTextChange.ViewModel
                 if (_text != value)
                 {
                     _text = value;
-                    OnPropertyChange(Text);
+                    OnPropertyChange(nameof(Text));
                 }
             }
         }
 
-        private Color _textColor;
+        private string _textColor = "Black";
 
-        public Color TextColor
+        public string TextColor
         {
             get { return _textColor; }
             set
@@ -37,37 +39,54 @@ namespace TaskDPTextChange.ViewModel
                 if (_textColor != value)
                 {
                     _textColor = value;
-                    OnPropertyChange(TextColor);
+                    OnPropertyChange(nameof(TextColor));
+                    Debug.WriteLine($"Свойство TextColor изменилось {value}");
                 }
             }
         }
 
-        private double _fontSizeText;
-
-        public double FontSizeText
+        private ComboBoxItem _selectedTextColor;
+        public ComboBoxItem SelectedTextColor
         {
-            get { return _fontSizeText; }
+            get => _selectedTextColor;
             set
             {
-                if (_fontSizeText != value)
+                if (_selectedTextColor != value)
                 {
-                    _fontSizeText = value;
-                    OnPropertyChange(FontSizeText);
+                    _selectedTextColor = value;
+                    TextColor = value?.Tag?.ToString(); // Получаем Tag и преобразуем в string
+                    OnPropertyChange(nameof(SelectedTextColor));
                 }
             }
         }
 
-        private bool _isBoldText;
 
-        public bool IsBoldText
+        private double _fontSize;
+
+        public double FontSize
         {
-            get { return _isBoldText; }
+            get { return _fontSize; }
             set
             {
-                if (_isBoldText != value)
+                if (_fontSize != value)
                 {
-                    _isBoldText = value;
-                    OnPropertyChange(IsBoldText);
+                    _fontSize = value;
+                    OnPropertyChange(nameof(FontSize));
+                }
+            }
+        }
+
+        private bool _isBold;
+
+        public bool IsBold
+        {
+            get { return _isBold; }
+            set
+            {
+                if (_isBold != value)
+                {
+                    _isBold = value;
+                    OnPropertyChange(nameof(IsBold));
                 }
             }
         }
